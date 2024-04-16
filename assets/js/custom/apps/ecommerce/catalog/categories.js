@@ -52,7 +52,7 @@ function botonEditarDatos(e) {
     let estado = e.target.getAttribute("data-estado");
     let idDescuento = e.target.getAttribute("data-descuento");
     let idCategoriaPadre = e.target.getAttribute("data-id-padre");
-    console.log(idCategoriaPadre);
+
     if (idCategoriaPadre === '') {
         idCategoriaPadre = 0;
     }
