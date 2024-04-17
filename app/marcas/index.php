@@ -140,7 +140,7 @@ require_once('crud.php');
 															</td>
 															<td class="text-end">
 																<div class="d-flex align-items-center gap-2 gap-lg-3">
-																	<a href="#" class="btn btn-sm fw-bold btn-primary boton-editar" data-bs-toggle="modal" data-bs-target="#kt_modal_editar_categoria" data-id="<?php echo $id_marca; ?>">Editar</a>
+																	<a href="#" class="btn btn-sm fw-bold btn-primary boton-editar" data-bs-toggle="modal" data-bs-target="#kt_modal_editar_marca" data-id="<?php echo $id_marca; ?> " data-nombre="<?php echo $row['NOMBRE'];?>" data-estado="<?php echo $row['ESTADO']; ?>"data-imagen="<?php echo $imagen; ?>" ?>Editar</a>
 																</div>
 															</td>
 															<td class="text-end">
@@ -195,7 +195,7 @@ require_once('crud.php');
 						<!--begin::Content-->
 						<div class="flex-row-fluid py-lg-5 px-lg-15">
 							<!--begin::Form-->
-							<form class="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" novalidate="novalidate" id="kt_modal_crear_marca_formulario" method="POST" enctype='multipart/form-data'>
+							<form class="form" novalidate="novalidate" id="kt_modal_crear_marca_formulario" method="POST" enctype='multipart/form-data'>
 								<input type="hidden" name="crear_marca" />
 								<div class="w-100">
 									<div class="fv-row mb-10">
@@ -260,11 +260,11 @@ require_once('crud.php');
 		</div>
 	</div>
 
-	<div class="modal fade" id="kt_modal_editar_categoria" tabindex="-1" aria-hidden="true">
+	<div class="modal fade" id="kt_modal_editar_marca" tabindex="-1" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered mw-900px">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h2>Editar categoría</h2>
+					<h2>Editar marca</h2>
 					<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
 						<i class="ki-duotone ki-cross fs-1">
 							<span class="path1"></span>
@@ -274,69 +274,51 @@ require_once('crud.php');
 				</div>
 
 				<div class="modal-body py-lg-10 px-lg-10">
-					<div class="d-flex flex-column flex-xl-row flex-row-fluid" id="kt_modal_editar_categoria_stepper">
+					<div class="d-flex flex-column flex-xl-row flex-row-fluid" id="kt_modal_editar_marca_stepper">
 						<!--begin::Content-->
 						<div class="flex-row-fluid py-lg-5 px-lg-15">
 							<!--begin::Form-->
-							<form class="form" novalidate="novalidate" id="kt_modal_editar_categoria_formulario" method="POST">
-								<input hidden name="editar_categoria" id="editar_categoria" value="<?php echo $id_categoria; ?>">
+							<form class="form" novalidate="novalidate" id="kt_modal_editar_marca_formulario" method="POST"  enctype='multipart/form-data'>
+								<input hidden name="editar_marca" id="editar_marca">
 								<div class="w-100">
 									<div class="fv-row mb-10">
 										<label class="required form-label">Nombre</label>
-										<input type="text" name="editar_nombre_categoria" id="editar_nombre_categoria" class="form-control mb-2" placeholder="Nombre de la categoría" value="" />
+										<input type="text" name="editar_nombre_marca" id="editar_nombre_marca"  required class="form-control mb-2" placeholder="Nombre de la marca" value="" />
 									</div>
 								</div>
-
-								<div class="w-100">
-									<div class="fv-row mb-10">
-										<label class="required form-label">Slug</label>
-										<input type="text" name="editar_slug_categoria" id="editar_slug_categoria" class="form-control mb-2" placeholder="Slug de la categoría" value="" />
-									</div>
-								</div>
-
-								<div class="w-100">
-									<div class="fv-row mb-10">
-										<label class="form-label">Descripción</label>
-										<textarea type="text" name="editar_descripcion_categoria" id="editar_descripcion_categoria" class="form-control mb-2" placeholder="Descripción de la categoría" value=""></textarea>
-									</div>
-								</div>
-
 								<div class="w-100">
 									<div class="mb-10"><label class=" form-label">Estado</label>
-										<select class="form-select mb-2" data-hide-search="true" name="editar_estado_categoria" id="editar_estado_categoria">
+										<select class="form-select mb-2" data-hide-search="true" data-placeholder="Select an option" name="editar_estado_marca" id="editar_estado_marca">
 											<option value="1" selected="Visible">Visible</option>
 											<option value="0">Oculto</option>
 										</select>
 									</div>
 								</div>
+								<div class="w-100">
 
-								<div class="d-flex justify-content-between">
-									<div class="w-49">
-										<div class="mb-10"> <label class="form-label">Categoría padre</label>
-											<select class="form-select mb-2" data-hide-search="true" name="editar_padre_categoria" id="editar_padre_categoria">
-												<option value="0">Sin categoría padre</option>
-												<?php foreach ($sql_categorias as $row) { ?>
-													<option value="<?php echo $row['ID'] ?>"><?php echo $row['NOMBRE'] ?></option>
-												<?php } ?>
-											</select>
-										</div>
+									<div class="card-header">
+										<label class="required form-label">Logotipo</label>
 									</div>
-
-									<div class="w-49">
-										<div class="mb-10"> <label class="form-label">Descuentos</label>
-											<select class="form-select mb-2" data-hide-search="true" name="editar_descuento_categoria" id="editar_descuento_categoria">
-												<option value="0" selected="Mostrar">Sin descuento</option>
-												<?php foreach ($sql_descuentos as $row) { ?>
-													<option value="<?php echo $row['ID'] ?>"><?php echo $row['NOMBRE'] ?></option>
-												<?php } ?>
-											</select>
+									<div class="card-body fv-row mb-10 text-center pt-0">
+										<div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3" data-kt-image-input="true">
+											<div class="image-input-wrapper w-300px h-150px" id="image_input_wrapper"></div>
+											<label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Seleccionar logotipo" id="change_imagen">
+												<i class="ki-duotone ki-pencil fs-7">
+													<span class="path1"></span>
+													<span class="path2"></span>
+												</i>
+												<input type="file" name="editar_logotipo_marca_imagen" accept=".png, .jpg, .jpeg" />
+											</label>
+										
 										</div>
+										<div class="text-muted fs-7">Los archivos deben ser *.png, *.jpg o *. <br> El tamaño de imagen recomendado es de 300x150 px</div>
+
 									</div>
 								</div>
-								<!--begin::Actions-->
+							
 								<div class="d-flex flex-stack pt-10 justify-content-end">
 									<div>
-										<button type="submit" name='kt_modal_edit_categoria_submit' id="kt_modal_edit_categoria_submit" class="btn btn-lg btn-primary">
+										<button type="submit" name='kt_modal_edit_marca_submit' id="kt_modal_edit_marca_submit" class="btn btn-lg btn-primary">
 											<span class="indicator-label">Editar
 												<i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
 													<span class="path1"></span>

@@ -32,24 +32,30 @@
     }
 }(); KTUtil.onDOMContentLoaded((function () { crearMarca.init() }));
 
-// "use strict"; let editarDescuento= function () {
-//     var e, t, i; return {
-//         init: function () {
-//             e = document.querySelector("#kt_modal_editar_descuento_formulario")
-//                 , t = document.querySelector("#kt_modal_edit_descuento_submit")
-//                 , i = FormValidation.formValidation(e, {
-//                     fields: {
-//                         editar_nombre_descuento: {validators: {notEmpty: { message: "El nombre es obligatorio." }}},
-//                         editar_minimo_descuento: { validators: { notEmpty: { message: "El mínimo es obligatorio." } } },
-//                         editar_maximo_descuento: { validators: { notEmpty: { message: "El máximo es obligatorio." } } },
-//                         editar_cantidad_descuento: { validators: { notEmpty: { message: "La cantidad del descuento es obligatoria." } } }
-//                     },
-//                     plugins: { trigger: new FormValidation.plugins.Trigger, bootstrap: new FormValidation.plugins.Bootstrap5({ rowSelector: ".fv-row", eleInvalidClass: "", eleValidClass: "" }) }
-//                 })
-//                 , t.addEventListener("click", (function (n) { n.preventDefault(), i.validate().then((function (i) { "Valid" == i ? (t.setAttribute("data-kt-indicator", "on"), t.disabled = !0, setTimeout((function () { document.querySelector("#kt_modal_editar_descuento_formulario").submit(), 2e3 }))) : document.querySelector("#kt_modal_edit_descuento_submit").preventDefault() })) }))
-//         }
-//     }
-// }(); KTUtil.onDOMContentLoaded((function () { editarDescuento.init() }));
+"use strict"; let editarMarca= function () {
+    var e, t, i; return {
+        init: function () {
+            e = document.querySelector("#kt_modal_editar_marca_formulario")
+                , t = document.querySelector("#kt_modal_edit_marca_submit")
+                , i = FormValidation.formValidation(e, {
+                    fields: {
+                        editar_nombre_marca: { validators: { notEmpty: { message: "El nombre es obligatorio." } } }, 
+                         
+                        editar_logotipo_marca_imagen: { 
+                            validators: {
+                                file: { 
+                                    extension: 'jpeg,jpg,png', 
+                                    message: 'Por favor, selecciona un archivo de imagen válido (JPEG, JPG, PNG).'
+                                },
+                            }
+                        }
+                    },
+                    plugins: { trigger: new FormValidation.plugins.Trigger, bootstrap: new FormValidation.plugins.Bootstrap5({ rowSelector: ".fv-row", eleInvalidClass: "", eleValidClass: "" }) }
+                })
+                , t.addEventListener("click", (function (n) { n.preventDefault(), i.validate().then((function (i) { "Valid" == i ? (t.setAttribute("data-kt-indicator", "on"), t.disabled = !0, setTimeout((function () { document.querySelector("#kt_modal_editar_marca_formulario").submit(), 2e3 }))) : document.querySelector("#kt_modal_edit_marca_submit").preventDefault() })) }))
+        }
+    }
+}(); KTUtil.onDOMContentLoaded((function () { editarMarca.init() }));
 
 let arrayBotonEliminar = document.querySelectorAll('.boton-eliminar');
 arrayBotonEliminar.forEach(element =>
@@ -60,24 +66,21 @@ function botonEliminarDatos(e) {
     document.getElementById('eliminar_marca').value = id;
 }
 
-// let arrayBotonEditar = document.querySelectorAll('.boton-editar');
-// arrayBotonEditar.forEach(element =>
-//     element.addEventListener('click', botonEditarDatos, false));
+let arrayBotonEditar = document.querySelectorAll('.boton-editar');
+arrayBotonEditar.forEach(element =>
+    element.addEventListener('click', botonEditarDatos, false));
 
-// function botonEditarDatos(e) {
-//     let id = e.target.getAttribute("data-id");
-//     let nombre = e.target.getAttribute("data-nombre");
-//     let minima = e.target.getAttribute("data-minima");
-//     let maxima = e.target.getAttribute("data-maxima");
-//     let cantidad = e.target.getAttribute("data-cantidad");
-//     let tipo = e.target.getAttribute("data-tipo");
-//     document.getElementById('editar_descuento').value = id;
-//     document.getElementById('editar_nombre_descuento').value = nombre;
-//     document.getElementById('editar_minimo_descuento').value = minima;
-//     document.getElementById('editar_maximo_descuento').value = maxima;
-//     document.getElementById('editar_tipo_descuento').value = tipo;
-//     document.getElementById('editar_cantidad_descuento').value = cantidad;
-// }
+function botonEditarDatos(e) {
+    let id = e.target.getAttribute("data-id");
+    let nombre = e.target.getAttribute("data-nombre");
+    let imagen = e.target.getAttribute("data-imagen");
+    let estado = e.target.getAttribute("data-estado");
+    document.getElementById('editar_marca').value = id;
+    document.getElementById('editar_nombre_marca').value = nombre;
+    document.getElementById('editar_estado_marca').value = estado;
+    document.getElementById('image_input_wrapper').style="background-size: cover; background-position: center;background-image: url(../assets/media/marcas/"+imagen+")";
+}
+
 "use strict";
 var KTAppEcommerceMarca = (function () {
     var t, e, f, n = () => {

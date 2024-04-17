@@ -295,7 +295,7 @@ require_once('crud.php');
 						<div class="flex-row-fluid py-lg-5 px-lg-15">
 							<!--begin::Form-->
 							<form class="form" novalidate="novalidate" id="kt_modal_editar_categoria_formulario" method="POST">
-							<input hidden name="editar_categoria" id="editar_categoria" value="<?php echo $id_categoria; ?>">
+							<input hidden name="editar_categoria" id="editar_categoria">
 								<div class="w-100">
 									<div class="fv-row mb-10">
 										<label class="required form-label">Nombre</label>
