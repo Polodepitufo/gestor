@@ -136,8 +136,8 @@ require_once('crud.php');
 															<td class="text-end">
 																<form class="form" novalidate="novalidate" id="formulario_eliminar" method="POST">
 																	<div class="d-flex align-items-center gap-2 gap-lg-3">
-																		<button type="button" class="btn btn-sm fw-bold btn-danger boton-eliminar" data-kt-ecommerce-descuento-filter="delete_row" name="boton-eliminar">X</button>
-																		<input hidden name="eliminar_descuento" value="<?php echo $id_descuento; ?>">
+																		<button type="button" class="btn btn-sm fw-bold btn-danger boton-eliminar" data-kt-ecommerce-descuento-filter="delete_row" data-id="<?php echo $id_descuento; ?>"  name="boton-eliminar">X</button>
+																		<input hidden name="eliminar_descuento" id="eliminar_descuento" value="">
 																	</div>
 																</form>
 															</td>
@@ -336,7 +336,6 @@ require_once('crud.php');
 	<script src="../assets/js/custom/apps/ecommerce/catalog/descuentos.js"></script>
 	<script src="../assets/js/widgets.bundle.js"></script>
 	<script src="../assets/js/custom/widgets.js"></script>
-	<script src="../assets/js/custom/apps/chat/chat.js"></script>
 	<script src="../assets/js/custom/utilities/modals/upgrade-plan.js"></script>
 	<script src="../assets/js/custom/utilities/modals/create-app.js"></script>
 	<script src="../assets/js/custom/utilities/modals/users-search.js"></script>

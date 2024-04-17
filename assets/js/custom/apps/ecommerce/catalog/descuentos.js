@@ -54,6 +54,15 @@ function botonEditarDatos(e) {
     document.getElementById('editar_tipo_descuento').value = tipo;
     document.getElementById('editar_cantidad_descuento').value = cantidad;
 }
+let arrayBotonEliminar = document.querySelectorAll('.boton-eliminar');
+arrayBotonEliminar.forEach(element =>
+    element.addEventListener('click', botonEliminarDatos, false));
+
+function botonEliminarDatos(e) {
+    let id = e.target.getAttribute("data-id");
+    document.getElementById('eliminar_descuento').value = id;
+}
+
 "use strict";
 var KTAppEcommerceDescuento = (function () {
     var t, e, f, n = () => {

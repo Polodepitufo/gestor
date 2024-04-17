@@ -68,6 +68,14 @@ function botonEditarDatos(e) {
     document.getElementById('editar_descuento_categoria').value = idDescuento;
 
 }
+let arrayBotonEliminar = document.querySelectorAll('.boton-eliminar');
+arrayBotonEliminar.forEach(element =>
+    element.addEventListener('click', botonEliminarDatos, false));
+
+function botonEliminarDatos(e) {
+    let id = e.target.getAttribute("data-id");
+    document.getElementById('eliminar_categoria').value = id;
+}
 "use strict";
 var KTAppEcommerceCategories = (function () {
     var t, e, f, n = () => {
