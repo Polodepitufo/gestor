@@ -130,3 +130,4 @@ var KTAppEcommerceMarca = (function () {
 KTUtil.onDOMContentLoaded(function () {
     KTAppEcommerceMarca.init();
 });
+

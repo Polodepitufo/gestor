@@ -18,18 +18,18 @@ if (isset($_POST['crear_marca'])) {
 
                 if ($db->query($sql_insertar_marca) === TRUE) {
                 } else {
-                    throw new Exception();
+                    throw new Exception('Se ha producido un error insertando la marca.');
                 }
             } else {
-                throw new Exception();
+                throw new Exception('Se ha producido un error subiendo el logotipo.');
             }
         } else {
-            throw new Exception();
+            throw new Exception('El logotipo no cumple con el formato permitido.');
         }
         $db->commit();
     } catch (Exception $e) {
         $db->rollback();
-        $errorMessage = 'Error.';
+        $errorMessage = $e->getMessage();
     }
 }
 if (isset($_POST['editar_marca'])) {
@@ -60,10 +60,10 @@ if (isset($_POST['editar_marca'])) {
                     chmod('../../assets/media/marcas/' . $nombre_imagen, 0777);
                     $sql_editar_marca = "UPDATE LISTADOMARCAS SET  NOMBRE ='$nombre_marca',ESTADO=$estado_marca, IMAGENPRINCIPAL= '$nombre_imagen' WHERE ID=$id";
                 } else {
-                    throw new Exception();
+                    throw new Exception('Se ha producido un error subiendo el logotipo.');
                 }
             } else {
-                throw new Exception();
+                throw new Exception('El logotipo no cumple con el formato permitido.');
             }
         } else {
             $sql_editar_marca = "UPDATE LISTADOMARCAS SET  NOMBRE ='$nombre_marca',ESTADO=$estado_marca WHERE ID=$id";
@@ -71,13 +71,13 @@ if (isset($_POST['editar_marca'])) {
 
         if ($db->query($sql_editar_marca) === TRUE) {
         } else {
-            throw new Exception();
+            throw new Exception('Se ha producido un error editando la marca');
         }
 
         $db->commit();
     } catch (Exception $e) {
         $db->rollback();
-        $errorMessage = 'Error.';
+        $errorMessage = $e->getMessage();
     }
 }
 if (isset($_POST['eliminar_marca'])) {
@@ -99,16 +99,20 @@ if (isset($_POST['eliminar_marca'])) {
                     if (file_exists($ruta)) {
                         unlink($ruta);
                     } else
-                        throw new Exception();
+                        throw new Exception('Se ha producido un error eliminando el logotipo anterior.');
                 } else {
-                    throw new Exception();
+                    throw new Exception('Se ha producido un error eliminando la marca.');
                 }
+            }else {
+                throw new Exception('No puedes eliminar una marca asociada a un color.');
             }
+        }else {
+            throw new Exception('No puedes eliminar una marca asociada a una talla.');
         }
         $db->commit();
     } catch (Exception $e) {
         $db->rollback();
-        $errorMessage = 'Error.';
+        $errorMessage = $e->getMessage();
     }
 }
 $sql_marcas = $db->query('SELECT * FROM LISTADOMARCAS');

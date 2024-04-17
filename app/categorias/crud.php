@@ -18,13 +18,13 @@ if (isset($_POST['crear_categoria'])) {
 
        if ($db->query($sql_insertar_categoria) === TRUE) {
        } else {
-           throw new Exception();
+           throw new Exception('Se ha producido un error insertando la categoría.');
        }
 
         $db->commit();
     } catch (Exception $e) {
         $db->rollback();
-        $errorMessage = 'Error.';
+        $errorMessage = $e->getMessage();
     }
 }
 if (isset($_POST['editar_categoria'])) {
@@ -44,13 +44,13 @@ if (isset($_POST['editar_categoria'])) {
 
        if ($db->query($sql_editar_categoria) === TRUE) {
        } else {
-           throw new Exception();
+           throw new Exception('Se ha producido un error editando la categoría.');
        }
 
         $db->commit();
     } catch (Exception $e) {
         $db->rollback();
-        $errorMessage = 'Error.';
+        $errorMessage = $e->getMessage();
     }
 }
 if (isset($_POST['eliminar_categoria'])) {
@@ -67,18 +67,18 @@ if (isset($_POST['eliminar_categoria'])) {
                 $sql_editar_categoria_padre = "UPDATE CATEGORIAS SET ISPADRE=1 WHERE ID = $id_categoria_editar";
                 if ($db->query($sql_editar_categoria_padre) === TRUE) {
                 } else {
-                    throw new Exception();
+                    throw new Exception('Se ha producido un error eliminando la categoría.');
                 }
             }
         }
         if ($db->query($sql_delete) === TRUE) {
         } else {
-            throw new Exception();
+            throw new Exception('Se ha producido un error eliminando la categoría.');
         }
         $db->commit();
     } catch (Exception $e) {
         $db->rollback();
-        $errorMessage = 'Error.';
+        $errorMessage = $e->getMessage();
     }
 }
 $sql_categorias = $db->query('SELECT * FROM CATEGORIAS');

@@ -388,6 +388,7 @@ require_once('crud.php');
 	<script src="../assets/js/custom/utilities/modals/upgrade-plan.js"></script>
 	<script src="../assets/js/custom/utilities/modals/create-app.js"></script>
 	<script src="../assets/js/custom/utilities/modals/users-search.js"></script>
+	<script src="../assets/js/custom/utilities/messageerror.js"></script>
 <script>
 
 

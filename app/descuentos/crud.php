@@ -16,13 +16,13 @@ if (isset($_POST['crear_descuento'])) {
 
         if ($db->query($sql_insertar_descuento) === TRUE) {
         } else {
-            throw new Exception();
+            throw new Exception('Se ha producido un error insertando el descuento.');
         }
 
         $db->commit();
     } catch (Exception $e) {
         $db->rollback();
-        $errorMessage = 'Error.';
+        $errorMessage = $e->getMessage();
     }
 }
 if (isset($_POST['editar_descuento'])) {
@@ -42,13 +42,13 @@ if (isset($_POST['editar_descuento'])) {
 
         if ($db->query($sql_editar_descuento) === TRUE) {
         } else {
-            throw new Exception();
+            throw new Exception('Se ha producido un error editando el descuento.');
         }
 
         $db->commit();
     } catch (Exception $e) {
         $db->rollback();
-        $errorMessage = 'Error.';
+        $errorMessage = $e->getMessage();
     }
 }
 if (isset($_POST['eliminar_descuento'])) {
@@ -57,6 +57,11 @@ if (isset($_POST['eliminar_descuento'])) {
         $db->begin_transaction();
         $sql_delete = "DELETE FROM DESCUENTOS WHERE ID = $id";
 
+        $sql_comprobar_categorias =$db->query("SELECT * FROM CATEGORIAS WHERE IDDESCUENTO = $id");
+        if ($sql_comprobar_categorias->num_rows > 0) {
+            $errorMessage='Aviso. Este descuento estaba vinculado a una o varias categorias.';
+        }
+
         if ($db->query($sql_delete) === TRUE) {
         } else {
             throw new Exception();
@@ -64,7 +69,7 @@ if (isset($_POST['eliminar_descuento'])) {
         $db->commit();
     } catch (Exception $e) {
         $db->rollback();
-        $errorMessage = 'Error.';
+        $errorMessage = $e->getMessage();
     }
 }
 $sql_descuentos = $db->query('SELECT * FROM DESCUENTOS');
