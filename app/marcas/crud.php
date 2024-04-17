@@ -63,12 +63,21 @@ if (isset($_POST['eliminar_marca'])) {
     try {
         $db->begin_transaction();
         $sql_delete = "DELETE FROM LISTADOMARCAS WHERE ID = $id";
+        $sql_select = $db->query("SELECT * FROM LISTADOMARCAS WHERE ID = $id");
+        foreach ($sql_select as $row) {
+            $nombre = $row['IMAGENPRINCIPAL'];
+        }
 
         $sql_delete_comprobar_tallas = $db->query("SELECT * FROM LISTADOTALLAS WHERE MARCA = $id");
         if ($sql_delete_comprobar_tallas->num_rows == 0) {
             $sql_delete_comprobar_colores = $db->query("SELECT * FROM LISTADOCOLORES WHERE MARCA = $id");
             if ($sql_delete_comprobar_colores->num_rows == 0) {
                 if ($db->query($sql_delete) === TRUE) {
+                    $ruta = '../../assets/media/marcas/' . $nombre;
+                    if (file_exists($ruta)) {
+                        unlink($ruta);
+                    } else
+                        throw new Exception();
                 } else {
                     throw new Exception();
                 }
