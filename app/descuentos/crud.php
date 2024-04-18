@@ -64,7 +64,7 @@ if (isset($_POST['eliminar_descuento'])) {
 
         if ($db->query($sql_delete) === TRUE) {
         } else {
-            throw new Exception();
+            throw new Exception('Se ha producido un error eliminando el descuento.');
         }
         $db->commit();
     } catch (Exception $e) {

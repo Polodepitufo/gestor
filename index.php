@@ -40,7 +40,9 @@ require_once('login.php');
 									<span class="indicator-progress">Comprobando datos...
 										<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 								</button>
-								<?php echo $errorMessage;?>
+								<input hidden value="<?php echo $errorMessage;?>" id="errorMessage">
+
+
 							</div>
 						</form>
 					</div>
@@ -59,6 +61,7 @@ require_once('login.php');
 	<script src="assets/plugins/global/plugins.bundle.js"></script>
 	<script src="assets/js/scripts.bundle.js"></script>
 	<script src="assets/js/custom/authentication/sign-in/general.js"></script>
+	<script src="assets/js/custom/utilities/messageerror.js"></script>
 </body>
 
 </html>

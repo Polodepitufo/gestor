@@ -1,6 +1,6 @@
 <?php
 if (isset($_GET['mensaje'])) {
-    $errorMessage = '<div class="fv-plugins-message-container invalid-feedback"><div data-field="email" data-validator="notEmpty">No tienes permisos para acceder a esta sección.</div></div>';
+    $errorMessage = 'No tienes permisos para acceder a esta sección.';
 } else {
     $errorMessage = '';
 }
@@ -20,12 +20,12 @@ if (isset($_POST['email']) && isset($_POST['password']) && !empty($_POST['email'
                 $_SESSION['sesion_rol']=$user['ROL'];
                 header('Location:app/dashboard/index.php');
             } else {
-                $errorMessage = '<div class="fv-plugins-message-container invalid-feedback"><div data-field="email" data-validator="notEmpty">No tienes permisos para acceder a esta sección.</div></div>';
+                $errorMessage = 'No tienes permisos para acceder a esta sección.';
             }
         } else {
-            $errorMessage = '<div class="fv-plugins-message-container invalid-feedback"><div data-field="email" data-validator="notEmpty">Contraseña inválida.</div></div>';
+            $errorMessage = 'Contraseña inválida.';
         }
     } else {
-        $errorMessage = '<div class="fv-plugins-message-container invalid-feedback"><div data-field="email" data-validator="notEmpty">Email y/o contraseña inválidos.</div></div>';
+        $errorMessage = 'Email y/o contraseña inválidos.';
     }
 }
